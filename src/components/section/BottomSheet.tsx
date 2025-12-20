@@ -19,8 +19,9 @@ export default function MapInterface() {
     <Sheet
       isOpen={isOpen}
       onClose={() => setOpen(false)}
-      snapPoints={[600, 220]}
+      snapPoints={[80, 1]}
       initialSnap={1}
+      disableDismiss
     >
       <Sheet.Container className="bg-background rounded-t-xl shadow-[0_-2px_10px_rgba(0,0,0,0.1)]">
         <Sheet.Header className="h-6 flex justify-center items-center">
@@ -84,7 +85,7 @@ export default function MapInterface() {
 
         </Sheet.Content>
       </Sheet.Container>
-      <Sheet.Backdrop />
+      {/* <Sheet.Backdrop /> */}
     </Sheet>
   )
 }

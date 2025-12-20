@@ -1,7 +1,6 @@
 import {
   Menu,
-  Navigation,
-  Target,
+  Plus,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import BottomSheet from '@/components/section/BottomSheet'
@@ -14,27 +13,21 @@ export default function Home() {
       <MapSection />
 
       {/* Top UI Container (Hamburger Only) */}
-      <div className="absolute top-4 left-4 z-10">
-        <Button variant="secondary" size="icon" className="h-10 w-10 rounded-full shadow-md bg-white text-gray-700">
+      <div className="absolute top-4 left-0 z-10">
+        <Button variant="default" className="h-10 pl-4 pr-3 rounded-r-full shadow-md transition-all hover:pl-6 hover:scale-105">
           <Menu className="h-6 w-6" />
         </Button>
       </div>
 
       {/* FABs */}
-      <div className="absolute bottom-48 right-4 z-10 flex flex-col gap-3">
+      <div className="absolute bottom-26 right-4 z-10 flex flex-col gap-2">
         <Button
           size="icon"
-          className="h-12 w-12 rounded-full shadow-lg bg-white hover:bg-gray-50 text-gray-700 border border-gray-100"
-          aria-label="Recenter"
-        >
-          <Target className="h-6 w-6" />
-        </Button>
-        <Button
-          size="icon"
-          className="h-12 w-12 rounded-full shadow-lg bg-blue-600 hover:bg-blue-700 text-white"
+          variant="outline"
+          className="h-14 w-14 rounded-full shadow-lg"
           aria-label="Directions"
         >
-          <Navigation className="h-6 w-6 fill-current" />
+          <Plus className="h-8 w-8" />
         </Button>
       </div>
 
