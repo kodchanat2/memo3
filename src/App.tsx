@@ -1,16 +1,17 @@
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import About from './pages/About'
-import Login from './pages/Login'
+import AuthGuard from './components/auth/AuthGuard'
 
 function App() {
   return (
     <div className="bg-background text-foreground min-h-screen min-w-screen">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <AuthGuard>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+    </AuthGuard>
     </div>
   )
 }
