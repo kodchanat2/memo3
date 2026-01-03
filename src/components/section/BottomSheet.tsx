@@ -5,12 +5,10 @@ import {
   Bookmark,
   PlusCircle,
   Bell,
-  Mic,
 } from 'lucide-react'
 import { Sheet } from 'react-modal-sheet'
 import { Button } from '@/components/ui/button'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Card } from '@/components/ui/card'
+import { SheetSearchHeader } from './SheetSearchHeader'
 
 export default function MapInterface() {
   const [isOpen, setOpen] = useState(true)
@@ -23,28 +21,14 @@ export default function MapInterface() {
       initialSnap={1}
       disableDismiss
     >
-      <Sheet.Container className="bg-background rounded-t-xl shadow-[0_-2px_10px_rgba(0,0,0,0.1)]">
-        <Sheet.Header className="h-6 flex justify-center items-center">
-            <div className="w-10 h-1 bg-gray-300 rounded-full" />
+      <Sheet.Container className="bg-background!">
+        <Sheet.Header className="flex flex-col justify-center items-center p-3 gap-3">
+          <div className="w-12 h-1 bg-gray-300 rounded-full" />
+          {/* Search Bar in Sheet */}
+          <SheetSearchHeader />
+          
         </Sheet.Header>
         <Sheet.Content className="px-4 pb-4 overflow-y-auto">
-          
-          {/* Search Bar in Sheet */}
-          <Card className="flex items-center gap-3 p-2 mb-4 rounded-full shadow-sm bg-secondary/50 border-0">
-              <div className="flex-1 text-sm text-foreground/80 font-medium pl-2">
-                Try "Restaurants"
-              </div>
-              <div className="flex items-center gap-1">
-                <Button variant="ghost" size="icon" className="shrink-0 text-muted-foreground h-8 w-8">
-                    <Mic className="h-4 w-4" />
-                </Button>
-                <Avatar className="h-8 w-8">
-                  <AvatarImage src="https://github.com/shadcn.png" />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-              </div>
-          </Card>
-
           {/* Filter Chips in Sheet */}
           <div className="flex gap-2 overflow-x-auto pb-4 no-scrollbar">
             {['Restaurants', 'Gas', 'Coffee', 'Hotels', 'Groceries', 'Parks'].map((label) => (
