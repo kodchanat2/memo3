@@ -1,5 +1,5 @@
 
-import { Mic } from 'lucide-react'
+import { Icon } from '@iconify/react'
 import {
   InputGroup,
   InputGroupInput,
@@ -27,7 +27,7 @@ export function SheetSearchHeader({ sheetRef }: { sheetRef: SheetRef | null }) {
       />
       <InputGroupAddon align="inline-end" >
         <InputGroupButton variant="ghost" size='icon-sm'>
-            <Mic className="size-5" />
+            <Icon icon="lucide:mic" className="size-5" />
         </InputGroupButton>
         <Avatar className="size-8">
           <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />

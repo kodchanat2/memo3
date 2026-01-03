@@ -1,11 +1,5 @@
 import { useState } from 'react'
-import {
-  Compass,
-  MapPin,
-  Bookmark,
-  PlusCircle,
-  Bell,
-} from 'lucide-react'
+import { Icon } from '@iconify/react'
 import { Sheet, type SheetRef } from 'react-modal-sheet'
 import { Button } from '@/components/ui/button'
 import { SheetSearchHeader } from './SheetSearchHeader'
@@ -46,11 +40,11 @@ export default function MapInterface() {
           </div>
 
           <div className="grid grid-cols-5 gap-1 pt-1 border-t">
-            <NavDirection icon={Compass} label="Explore" active />
-            <NavDirection icon={MapPin} label="Go" />
-            <NavDirection icon={Bookmark} label="Saved" />
-            <NavDirection icon={PlusCircle} label="Contribute" />
-            <NavDirection icon={Bell} label="Updates" />
+            <NavDirection icon="lucide:compass" label="Explore" active />
+            <NavDirection icon="lucide:map-pin" label="Go" />
+            <NavDirection icon="lucide:bookmark" label="Saved" />
+            <NavDirection icon="lucide:plus-circle" label="Contribute" />
+            <NavDirection icon="lucide:bell" label="Updates" />
           </div>
           
             {/* Content placeholder for expanded state */}
@@ -76,10 +70,10 @@ export default function MapInterface() {
   )
 }
 
-function NavDirection({ icon: Icon, label, active }: { icon: any, label: string, active?: boolean }) {
+function NavDirection({ icon, label, active }: { icon: string, label: string, active?: boolean }) {
   return (
     <button className={`flex flex-col items-center gap-1 p-2 rounded-lg transition-colors ${active ? 'text-blue-600' : 'text-gray-500 hover:bg-gray-100'}`}>
-      <Icon className={`h-6 w-6 ${active ? 'fill-current' : ''}`} />
+      <Icon icon={icon} className={`h-6 w-6 ${active ? 'fill-current' : ''}`} />
       <span className="text-xs font-medium">{label}</span>
     </button>
   )

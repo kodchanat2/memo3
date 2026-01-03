@@ -4,8 +4,9 @@ import BottomSheet from './BottomSheet'
 
 
 describe('BottomSheet', () => {
-    it('renders filter chips', () => {
+    it('renders filter chips and search input', () => {
         render(<BottomSheet />)
-        expect(screen.getByText('Restaurants')).toBeDefined()
+        expect(screen.getByText('Restaurants')).toBeInTheDocument()
+        expect(screen.getByPlaceholderText('Search here')).toBeInTheDocument()
     })
 })
