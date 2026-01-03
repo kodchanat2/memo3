@@ -1,17 +1,28 @@
+import React from 'react'
 import { Icon } from '@iconify/react'
 import { Button } from '@/components/ui/button'
 import BottomSheet from '@/components/section/BottomSheet'
 import MapSection from '@/components/section/MapSection'
+import SideSheet from '@/components/section/SideSheet'
 
 export default function Home() {
+  const [isSideSheetOpen, setIsSideSheetOpen] = React.useState(false)
+
   return (
     <div className="relative h-svh w-full overflow-hidden bg-gray-100">
       {/* Map Background */}
       <MapSection />
 
+      {/* Side Sheet */}
+      <SideSheet open={isSideSheetOpen} onOpenChange={setIsSideSheetOpen} />
+
       {/* Top UI Container (Hamburger Only) */}
       <div className="absolute top-4 left-0 z-10">
-        <Button variant="default" className="h-10 pl-4 pr-3 rounded-r-full shadow-md transition-all hover:pl-6 hover:scale-105">
+        <Button
+          variant="secondary"
+          className="h-10 pl-4 pr-3 rounded-r-full shadow-md transition-all hover:pl-6 hover:scale-105"
+          onClick={() => setIsSideSheetOpen(true)}
+        >
           <Icon icon="lucide:menu" className="h-6 w-6" />
         </Button>
       </div>

@@ -15,7 +15,8 @@ export default function MapInterface() {
       snapPoints={[80, 1]}
       initialSnap={1}
       disableDismiss
-      ref={(ref) => (!sheetRef && ref)?setSheetRef(ref):undefined}
+      ref={(ref) => (!sheetRef && ref) ? setSheetRef(ref) : undefined}
+      style={{ zIndex: 10 }}
     >
       <Sheet.Container className="bg-background!">
         <Sheet.Header className="flex flex-col justify-center items-center p-3 gap-3">
