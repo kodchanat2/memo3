@@ -11,14 +11,19 @@ import {
   AvatarFallback,
   AvatarImage,
 } from '@/components/ui/avatar'
+import type { SheetRef } from 'react-modal-sheet'
 
-export function SheetSearchHeader() {
+export function SheetSearchHeader({ sheetRef }: { sheetRef: SheetRef | null }) {
+  const handleFocus = () => {
+    sheetRef?.snapTo(2)
+  }
   return (
-    <InputGroup className="rounded-full h-10 shadow-sm mb-4">
+    <InputGroup className="rounded-full h-10 shadow-sm">
       <InputGroupInput 
-          type="search" 
-          placeholder="Search here" 
-          className="pl-4 h-10"
+        type="search" 
+        placeholder="Search here" 
+        className="pl-4 h-10"
+        onFocus={handleFocus}
       />
       <InputGroupAddon align="inline-end" >
         <InputGroupButton variant="ghost" size='icon-sm'>

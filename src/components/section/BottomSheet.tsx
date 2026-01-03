@@ -6,12 +6,13 @@ import {
   PlusCircle,
   Bell,
 } from 'lucide-react'
-import { Sheet } from 'react-modal-sheet'
+import { Sheet, type SheetRef } from 'react-modal-sheet'
 import { Button } from '@/components/ui/button'
 import { SheetSearchHeader } from './SheetSearchHeader'
 
 export default function MapInterface() {
   const [isOpen, setOpen] = useState(true)
+  const [sheetRef, setSheetRef] = useState<SheetRef | null>(null);
 
   return (
     <Sheet
@@ -20,12 +21,13 @@ export default function MapInterface() {
       snapPoints={[80, 1]}
       initialSnap={1}
       disableDismiss
+      ref={(ref) => (!sheetRef && ref)?setSheetRef(ref):undefined}
     >
       <Sheet.Container className="bg-background!">
         <Sheet.Header className="flex flex-col justify-center items-center p-3 gap-3">
           <div className="w-12 h-1 bg-gray-300 rounded-full" />
           {/* Search Bar in Sheet */}
-          <SheetSearchHeader />
+          <SheetSearchHeader sheetRef={sheetRef}/>
           
         </Sheet.Header>
         <Sheet.Content className="px-4 pb-4 overflow-y-auto">
