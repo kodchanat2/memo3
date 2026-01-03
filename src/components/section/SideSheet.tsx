@@ -9,6 +9,9 @@ import {
 } from '@/components/ui/sheet'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
+import { useTheme } from '@/components/ui/theme-provider'
+import { Switch } from '@/components/ui/switch'
+import { Label } from '@/components/ui/label'
 
 interface SideSheetProps {
   open: boolean
@@ -17,6 +20,7 @@ interface SideSheetProps {
 
 export default function SideSheet({ open, onOpenChange }: SideSheetProps) {
   const { user } = useAuth()
+  const { theme, setTheme } = useTheme()
 
   const handleLogout = () => {
     auth.signOut()
@@ -56,7 +60,23 @@ export default function SideSheet({ open, onOpenChange }: SideSheetProps) {
               <Icon icon="lucide:settings" className="h-5 w-5" />
               Settings
             </Button>
-            {/* Future menu items can go here */}
+
+            <div className="flex items-center justify-between px-3 py-2">
+              <div className="flex items-center gap-3">
+                <Icon
+                  icon={theme === 'dark' ? "lucide:moon" : "lucide:sun"}
+                  className="h-5 w-5"
+                />
+                <Label htmlFor="dark-mode" className="font-normal cursor-pointer">
+                  Dark Mode
+                </Label>
+              </div>
+              <Switch
+                id="dark-mode"
+                checked={theme === 'dark'}
+                onCheckedChange={(checked) => setTheme(checked ? 'dark' : 'light')}
+              />
+            </div>
           </div>
         </div>
 
