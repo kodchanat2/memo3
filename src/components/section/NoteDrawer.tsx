@@ -31,9 +31,9 @@ export default function NoteDrawer({ open, onOpenChange }: NoteDrawerProps) {
 
   return (
     <Drawer open={open} onOpenChange={onOpenChange} dismissible={true}>
-      <DrawerContent className="h-full max-h-80! rounded-none border-none">
         <DrawerHeader className="sr-only">
           <DrawerTitle>New Note</DrawerTitle>
+      <DrawerContent className="h-full max-h-80! rounded-none border-none" handle={false}>
         </DrawerHeader>
         <div className="flex flex-col h-full overflow-hidden">
           {/* Main Textarea Area */}
