@@ -6,10 +6,12 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
+  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
 } from '@/components/ui/drawer'
 import { ButtonGroup } from '../ui/button-group'
+import Tabs from '../ui/tabs'
 
 interface NoteDrawerProps {
   open: boolean
@@ -31,11 +33,16 @@ export default function NoteDrawer({ open, onOpenChange }: NoteDrawerProps) {
 
   return (
     <Drawer open={open} onOpenChange={onOpenChange} dismissible={true}>
-        <DrawerHeader className="sr-only">
-          <DrawerTitle>New Note</DrawerTitle>
       <DrawerContent className="h-full max-h-80! rounded-none border-none" handle={false}>
+        <DrawerHeader className='pb-0'>
+          <DrawerTitle className='mx-auto w-full max-w-sm'>
+            <Tabs items={[
+              { id: 'note', title: 'Note', icon: 'grommet-icons:note', },
+              { id: 'todo', title: 'Todo', icon: 'lucide:list-check', },
+            ]} />
+          </DrawerTitle>
         </DrawerHeader>
-        <div className="flex flex-col h-full overflow-hidden">
+        <DrawerFooter className="flex flex-col h-full overflow-hidden p-0">
           {/* Main Textarea Area */}
           <div className="flex-1 overflow-y-auto pt-4 px-4">
             <Textarea
@@ -90,7 +97,7 @@ export default function NoteDrawer({ open, onOpenChange }: NoteDrawerProps) {
               </ButtonGroup>
             </div>
           </div>
-        </div>
+        </DrawerFooter>
       </DrawerContent>
     </Drawer>
   )
