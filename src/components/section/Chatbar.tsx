@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "../ui/button"
 
 import { useChat } from '@/context/ChatContext'
+import { useTodos } from "@/context/TodoContext"
 
 interface ChatbarProps {
   onSend?: (message: string) => void
@@ -112,6 +113,7 @@ export default function Chatbar({
 
 function EditBar() {
   const { editing, setEditing } = useChat()
+  const { deleteTodo } = useTodos()
   if (!editing) return null
   return (
     <div className="bg-accent/50 h-10 w-full absolute bottom-full inset-x-0 flex items-center justify-between px-3 border-l-4 border-l-accent-foreground/30">
@@ -119,6 +121,18 @@ function EditBar() {
         <Icon icon="lucide:edit" className="size-4" />
         {editing.text}
       </div>
+      <div className="flex-1 w-full" />
+      <Button
+        variant="ghost"
+        size="icon"
+        className="rounded-full -mr-1"
+        onClick={() => {
+          deleteTodo(editing.id)
+          setEditing()
+        }}
+      >
+        <Icon icon="lucide:trash-2" className="size-5" />
+      </Button>
       <Button
         variant="ghost"
         size="icon"
