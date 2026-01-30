@@ -26,7 +26,7 @@ export default function Chatbar({
   placeholder = "Message",
   className,
 }: ChatbarProps) {
-  const { draft, setDraft, clearDraft, editing, setEditing, setChatRef } = useChat()
+  const { draft, setDraft, clearDraft, setChatRef } = useChat()
   const handleSend = () => {
     if (draft.trim()) {
       onSend?.(draft)

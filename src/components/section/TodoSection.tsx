@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Icon } from '@iconify/react';
 import { cn } from '@/lib/utils';
 import { useTodos, type Todo } from '@/context/TodoContext';
@@ -43,7 +43,7 @@ const TodoItem: React.FC<{
 };
 
 const TodoSection: React.FC = () => {
-  const { todos, toggleComplete, toggleFlag, deleteTodo } = useTodos();
+  const { todos, toggleComplete } = useTodos();
   const { setEditing, editing } = useChat();
 
   return (
