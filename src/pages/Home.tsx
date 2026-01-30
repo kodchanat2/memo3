@@ -1,7 +1,6 @@
 import React from 'react'
 import { Icon } from '@iconify/react'
 import { Button } from '@/components/ui/button'
-import BottomSheet from '@/components/section/BottomSheet'
 import MapSection from '@/components/section/MapSection'
 import SideSheet from '@/components/section/SideSheet'
 import NoteDrawer from '@/components/section/NoteDrawer'
