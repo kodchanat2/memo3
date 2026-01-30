@@ -1,26 +1,33 @@
 import React from 'react'
 import { Icon } from '@iconify/react'
 import { Button } from '@/components/ui/button'
-import BottomSheet from '@/components/section/BottomSheet'
-import MapSection from '@/components/section/MapSection'
 import SideSheet from '@/components/section/SideSheet'
-import NoteDrawer from '@/components/section/NoteDrawer'
 import Chatbar from '@/components/section/Chatbar'
+import TodoSection from '@/components/section/TodoSection'
+import { useTodos } from '@/context/TodoContext'
+import { useChat } from '@/context/ChatContext'
 
-export default function Home() {
+export default function Todo() {
   const [isSideSheetOpen, setIsSideSheetOpen] = React.useState(false)
-  const [isNoteDrawerOpen, setIsNoteDrawerOpen] = React.useState(false)
+  const { addTodo, editTodo } = useTodos()
+  const { editing, setEditing } = useChat()
+
+  const handleAddTodo = (msg: string) => {
+    if (editing) {
+      editTodo(editing.id, msg);
+      setEditing();
+    } else {
+      addTodo(msg);
+    }
+  };
 
   return (
     <div className="relative h-dvh w-full overflow-hidden bg-gray-100">
       {/* Map Background */}
-      <MapSection />
+      <TodoSection />
 
       {/* Side Sheet */}
       <SideSheet open={isSideSheetOpen} onOpenChange={setIsSideSheetOpen} />
-
-      {/* Note Drawer */}
-      <NoteDrawer open={isNoteDrawerOpen} onOpenChange={setIsNoteDrawerOpen} />
 
       {/* Top UI Container (Hamburger Only) */}
       <div className="absolute top-4 left-0 z-10">
@@ -33,22 +40,7 @@ export default function Home() {
         </Button>
       </div>
 
-      {/* FABs */}
-      <div className="absolute bottom-[calc(var(--safe)+1rem)] right-4 z-10 flex flex-col gap-2">
-        <Button
-          size="icon"
-          variant="outline"
-          className="h-14 w-14 rounded-full shadow-lg"
-          aria-label="New Note"
-          onClick={() => setIsNoteDrawerOpen(true)}
-        >
-          <Icon icon="lucide:plus" className="h-8 w-8" />
-        </Button>
-      </div>
-
-      {/* Bottom Sheet Navigation */}
-      {/* <BottomSheet /> */}
-      <Chatbar />
+      <Chatbar onSend={handleAddTodo} />
     </div>
   )
 }
