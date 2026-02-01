@@ -51,7 +51,7 @@ const TodoSection: React.FC = () => {
       <div className="w-full h-safe bg-foreground/5 shrink-0"></div>
       
       {/* Scrollable List */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto p-4 pb-safe space-y-4">
         <div className="flex flex-col rounded-lg border border-border/40 shadow-sm">
           {todos.length === 0 ? (
             <div className="p-8 text-center text-muted-foreground text-sm">

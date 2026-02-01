@@ -1,4 +1,5 @@
 import * as React from "react"
+import { useVisualViewport } from '@/hooks/useVisualViewport'
 import { Icon } from "@iconify/react"
 import {
   InputGroup,
@@ -27,6 +28,19 @@ export default function Chatbar({
   className,
 }: ChatbarProps) {
   const { draft, setDraft, clearDraft, setChatRef } = useChat()
+
+  const viewport = useVisualViewport()
+  const [bottomOffset, setBottomOffset] = React.useState(0)
+
+  // Update offset when viewport changes, to keep it attached to the keyboard
+  React.useEffect(() => {
+    // We calculate the difference between the layout height (window.innerHeight)
+    // and the visual viewport height. Ideally, this difference is the keyboard height 
+    // (plus any other browser UI overlays).
+    const offset = Math.max(0, window.innerHeight - viewport.height)
+    setBottomOffset(offset)
+  }, [viewport])
+
   const handleSend = () => {
     if (draft.trim()) {
       onSend?.(draft)
@@ -42,7 +56,10 @@ export default function Chatbar({
   }
 
   return (
-    <div className={cn("w-screen bg-background backdrop-blur-xl border-t border-border/40 p-3 pt-2 min-h-safe sticky bottom-0 z-10", className)}>
+    <div
+      className={cn("w-screen backdrop-blur-xl border-t border-border/40 p-3 pt-2 fixed left-0 right-0 z-50 transition-all duration-75 ease-out", className)}
+      style={{ bottom: `${bottomOffset}px` }}
+    >
       <EditBar />
       <div className="max-w-full mx-auto flex items-start gap-3">
         {/* Clip Button (Left) */}

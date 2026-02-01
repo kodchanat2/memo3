@@ -4,10 +4,20 @@ import Todo from './pages/Todo'
 import About from './pages/About'
 import AuthGuard from './components/auth/AuthGuard'
 import { AppProviders } from './context/AppProviders'
+import { useVisualViewport } from './hooks/useVisualViewport'
+import React from 'react'
 
 function App() {
+  const viewport = useVisualViewport()
+  const [height, setHeight] = React.useState(0)
+  React.useEffect(() => {
+    // set height
+    document.body.style.height = `${viewport.height}px`
+    setHeight(viewport.height)
+  }, [viewport])
+
   return (
-    <div className="bg-background text-foreground min-h-screen min-w-screen">
+    <div className="bg-background text-foreground h-dvh max-h-dvh min-w-screen" style={{ height: `${height}px` }}>
       <AuthGuard>
         <AppProviders>
           <Routes>
