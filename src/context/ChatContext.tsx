@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, type ReactNode } from 'react';
 import type { Todo } from './TodoContext';
+import { useLocation } from 'react-router-dom';
+import { useTodos } from './TodoContext';
 
 interface ChatContextType {
   draft: string;
@@ -8,6 +10,7 @@ interface ChatContextType {
   setEditing: (todo?: Todo) => void;
   clearDraft: () => void;
   setChatRef: (ref: HTMLTextAreaElement | null) => void;
+  send: (msg: string) => void;
 }
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
@@ -16,6 +19,8 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [draft, setDraft] = useState('');
   const [editing, setEditingId] = useState<Todo | null>(null);
   const [chatRef, setChatRef] = React.useState<HTMLTextAreaElement | null>(null);
+  const location = useLocation();
+  const { addTodo, editTodo } = useTodos();
 
   const clearDraft = () => {
     setDraft('');
@@ -36,8 +41,22 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
 
+  const send = (msg: string) => {
+    if (editing) {
+      if (location.pathname === "/todo") {
+        editTodo(editing.id, msg);
+      }
+      setEditing();
+    } else {
+      if (location.pathname === "/todo") {
+        addTodo(msg);
+      }
+      clearDraft()
+    }
+  }
+
   return (
-    <ChatContext.Provider value={{ draft, setDraft, clearDraft, editing, setEditing, setChatRef }}>
+    <ChatContext.Provider value={{ draft, setDraft, clearDraft, editing, setEditing, setChatRef, send }}>
       {children}
     </ChatContext.Provider>
   );

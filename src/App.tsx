@@ -6,6 +6,8 @@ import AuthGuard from './components/auth/AuthGuard'
 import { AppProviders } from './context/AppProviders'
 import { useVisualViewport } from './hooks/useVisualViewport'
 import React from 'react'
+import { AnimatePresence } from 'motion/react'
+import Layout from './components/Layout'
 
 function App() {
   const viewport = useVisualViewport()
@@ -20,13 +22,17 @@ function App() {
     <div className="bg-background text-foreground h-dvh max-h-dvh min-w-screen" style={{ height: `${height}px` }}>
       <AuthGuard>
         <AppProviders>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/todo" element={<Todo />} />
-            <Route path="/about" element={<About />} />
-          </Routes>
+          <Layout>
+            <AnimatePresence>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/todo" element={<Todo />} />
+                <Route path="/about" element={<About />} />
+              </Routes>
+            </AnimatePresence>
+          </Layout>
         </AppProviders>
-    </AuthGuard>
+      </AuthGuard>
     </div>
   )
 }

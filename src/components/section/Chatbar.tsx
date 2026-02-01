@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/input-group"
 import { cn } from "@/lib/utils"
 import { Button } from "../ui/button"
-
 import { useChat } from '@/context/ChatContext'
 import { useTodos } from "@/context/TodoContext"
 
@@ -27,7 +26,7 @@ export default function Chatbar({
   placeholder = "Message",
   className,
 }: ChatbarProps) {
-  const { draft, setDraft, clearDraft, setChatRef } = useChat()
+  const { draft, setDraft, clearDraft, setChatRef, send } = useChat()
 
   const viewport = useVisualViewport()
   const [bottomOffset, setBottomOffset] = React.useState(0)
@@ -43,8 +42,8 @@ export default function Chatbar({
 
   const handleSend = () => {
     if (draft.trim()) {
-      onSend?.(draft)
-      clearDraft()
+      if (onSend) onSend(draft)
+      else send(draft.trim())
     }
   }
 
